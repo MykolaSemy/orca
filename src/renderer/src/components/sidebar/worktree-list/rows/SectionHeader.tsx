@@ -20,9 +20,9 @@ import type {
 } from '../../../../../../shared/sidebar-list/row-types'
 import { PINNED_GROUP_KEY } from '../../../../../../shared/sidebar-list/group-keys'
 import { getWorkspaceStatusFromGroupKey } from '../../workspace-status'
-import { getVirtualRowTransform } from '../viewport/virtual-rows'
 import { getSidebarHeaderVisual } from './header-visuals'
 import {
+  getSectionHeaderRowStyle,
   resolveProjectGroupAccentColor,
   resolveProjectGroupHeaderColor
 } from '../../project-header-color'
@@ -212,7 +212,7 @@ export function renderWorktreeSectionHeaderRow(args: {
             )
           : 'absolute top-0'
       )}
-      style={isActiveStickyHeader ? undefined : { transform: getVirtualRowTransform(vItem.start) }}
+      style={getSectionHeaderRowStyle(isActiveStickyHeader, projectGroupColor, vItem.start)}
     >
       <div
         id={getWorktreeOptionId(row.key)}

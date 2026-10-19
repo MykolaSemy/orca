@@ -1,3 +1,5 @@
+import type React from 'react'
+import { getVirtualRowTransform } from './worktree-list/viewport/virtual-rows'
 import { DEFAULT_REPO_BADGE_COLOR, REPO_COLORS } from '../../../../shared/constants'
 import { normalizeRepoBadgeColor } from '../../../../shared/repo-badge-color'
 import type { GroupHeaderRow } from '../../../../shared/sidebar-list/row-types'
@@ -42,4 +44,18 @@ export function resolveProjectGroupAccentColor(
     return null
   }
   return normalizeRepoBadgeColor(row.projectGroup.color)
+}
+
+// Why: a pinned sticky header is opaque; tint it so the group's section color doesn't break at the top.
+export function getSectionHeaderRowStyle(
+  isActiveStickyHeader: boolean,
+  color: string | null,
+  start: number
+): React.CSSProperties | undefined {
+  if (!isActiveStickyHeader) {
+    return { transform: getVirtualRowTransform(start) }
+  }
+  return color
+    ? { backgroundColor: `color-mix(in srgb, ${color} 9%, var(--worktree-sidebar))` }
+    : undefined
 }
