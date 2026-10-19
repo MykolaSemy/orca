@@ -55,7 +55,15 @@ export function getSectionHeaderRowStyle(
   if (!isActiveStickyHeader) {
     return { transform: getVirtualRowTransform(start) }
   }
-  return color
-    ? { backgroundColor: `color-mix(in srgb, ${color} 9%, var(--worktree-sidebar))` }
-    : undefined
+  if (!color) {
+    return undefined
+  }
+  // Same shape as ProjectGroupColorBandLayer: rounded top, right-1 inset, left accent edge.
+  return {
+    backgroundColor: `color-mix(in srgb, ${color} 9%, var(--worktree-sidebar))`,
+    boxShadow: `inset 2px 0 0 color-mix(in srgb, ${color} 70%, transparent)`,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    marginRight: 4
+  }
 }
