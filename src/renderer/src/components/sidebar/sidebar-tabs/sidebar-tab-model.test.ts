@@ -73,7 +73,7 @@ describe('buildSidebarTabItems', () => {
     )
     expect(item.panes).toEqual([
       { leafId: 'left', title: 'Claude', isActive: false },
-      { leafId: 'right', title: 'Terminal 2', isActive: true }
+      { leafId: 'right', title: 'Pane 2', isActive: true }
     ])
   })
 

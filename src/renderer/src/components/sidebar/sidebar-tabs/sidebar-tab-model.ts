@@ -85,7 +85,7 @@ function resolvePanes(
     title:
       layout.titlesByLeafId?.[leafId] ||
       resolveRuntimePaneTitleForLeaf(layout, runtimeTitles, leafId) ||
-      `Terminal ${index + 1}`,
+      `Pane ${index + 1}`,
     isActive: isActiveTab && layout.activeLeafId === leafId
   }))
 }
