@@ -1,5 +1,6 @@
 import { DEFAULT_REPO_BADGE_COLOR, REPO_COLORS } from '../../../../shared/constants'
 import { normalizeRepoBadgeColor } from '../../../../shared/repo-badge-color'
+import type { GroupHeaderRow } from '../../../../shared/sidebar-list/row-types'
 
 const PROJECT_GROUP_HEADER_KEY_PREFIX = 'repo:'
 const PROVIDER_PROJECT_HEADER_KEY_PREFIX = 'project:'
@@ -30,4 +31,15 @@ export function resolveProjectGroupHeaderColor(args: {
     return undefined
   }
   return resolveRepoHeaderColor(args.badgeColor)
+}
+
+// User-picked project group color; null keeps the default muted header.
+export function resolveProjectGroupAccentColor(
+  row: Pick<GroupHeaderRow, 'repo' | 'projectGroup'>
+): string | null {
+  // Why: the synthetic "Ungrouped" bucket has no stored color.
+  if (row.repo || !row.projectGroup || !('color' in row.projectGroup)) {
+    return null
+  }
+  return normalizeRepoBadgeColor(row.projectGroup.color)
 }
